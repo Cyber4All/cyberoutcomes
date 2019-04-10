@@ -1,0 +1,34 @@
+<app-suggestion-filter (date)="updateDate($event)" (name)="updateName($event)" (source)="updateSource($event)"></app-suggestion-filter>
+<div class="standard-outcomes">
+  <div class="search-bar">
+    <i class="far fa-search"></i>
+    <input type="search" placeholder="Search for cyber outcomes..." [(ngModel)]="searchStringValue" (ngModelChange)="searchString$.next($event)" />
+  </div>
+  <div class="title-bar" *ngIf="searchResults.length > 0">
+    {{ searchResults.length + ' Results'}}
+  </div>
+  <div class="results">
+    <ng-container [ngTemplateOutlet]="listTemplate" [ngTemplateOutletContext]="{ items: searchResults }"></ng-container>
+  </div>
+</div>
+
+<ng-template #listTemplate let-items="items">
+  <virtual-scroller #scroll [style.height]="'70vh'" [items]="items" [enableUnequalChildrenSizes]="true">
+    <ng-container *ngIf="!loading; else loadingTemplate">
+      <div *ngFor="let i of scroll.viewPortItems">
+        <app-outcomes-list-item [outcome]="i" [selected]="selectedOutcomeIDs.includes(i.id)" (toggleMap)="toggleStandardOutcome(i, $event)"></app-outcomes-list-item>
+      </div>
+    </ng-container>
+  </virtual-scroller>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div class="loading-template">
+    <span>
+      <i class="far fa-spinner-third fa-spin"></i>
+    </span>
+    <div>
+      Loading {{ loading === 'suggest' ? 'suggestions...' : loading === 'search' ? 'search results...' : '...' }}
+    </div>
+  </div>
+</ng-template>

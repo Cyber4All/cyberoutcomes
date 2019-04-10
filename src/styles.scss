@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+// font
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700');
+@import './_vars.scss';
+
+body {
+  font-family: 'Source Sans Pro', serif;
+  background: #f0f4f7 !important;
+  height: 100vh;
+  margin: 0;
+}
