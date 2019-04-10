@@ -2,6 +2,7 @@
 // font
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700');
 @import './_vars.scss';
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 body {
   font-family: 'Source Sans Pro', serif;

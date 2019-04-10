@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  suggestionUrl: 'http://localhost:7000',
+  suggestionUrl: 'https://api-outcome-suggestion.clark.center',
 };
 
 /*
