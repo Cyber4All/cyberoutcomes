@@ -10,6 +10,10 @@ import { OutcomesListItemComponent } from './standard-outcomes/outcomes-list-ite
 
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 import { OutcomeService } from './outcome.service';
 import { SuggestionFilterComponent } from './standard-outcomes/suggestion-filter.component';
 
@@ -27,6 +31,9 @@ import { SuggestionFilterComponent } from './standard-outcomes/suggestion-filter
     HttpClientModule,
     VirtualScrollerModule,
     MatTableModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatButtonToggleModule,
   ],
   providers: [OutcomeService],
   bootstrap: [AppComponent]

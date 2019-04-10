@@ -5,38 +5,45 @@
   </div>
 </nav>
 
+
 <section class="table-wrapper">
-  <mat-table [dataSource]="guidelines" class="mat-elevation-z8">
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
-      <mat-cell *matCellDef="let guideline"> {{guideline.id}} </mat-cell>
-    </ng-container>
-  
+  <mat-button-toggle-group #group="matButtonToggleGroup">
+    <mat-button-toggle *ngFor="let source of sources" (click)="selectSource(source)"
+      [ngClass]="{ 'activeSource': source == currentSource }">
+      {{ source }}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-table *ngIf="dataSource" [dataSource]="dataSource">
+
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
       <mat-cell *matCellDef="let guideline"> {{guideline.name}} </mat-cell>
     </ng-container>
-  
+
     <!-- Weight Column -->
     <ng-container matColumnDef="outcome">
-      <mat-header-cell *matHeaderCellDef> Outcome </mat-header-cell>
-      <mat-cell *matCellDef="let guideline"> {{guideline.outcome}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="outcomeColumn"> Outcome </mat-header-cell>
+      <mat-cell *matCellDef="let guideline" class="outcomeColumn"> {{guideline.outcome}} </mat-cell>
     </ng-container>
-  
+
     <!-- Symbol Column -->
     <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-      <mat-cell *matCellDef="let guideline"> {{guideline.date}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="dateColumn"> Date </mat-header-cell>
+      <mat-cell *matCellDef="let guideline" class="dateColumn"> {{guideline.date}} </mat-cell>
     </ng-container>
-  
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
 </section>
 <section class="outcome-search">
   <div class="wrapper">
-    
+
   </div>
 </section>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OutcomeService } from './outcome.service';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { StandardOutcome } from '@cyber4all/clark-entity';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +11,34 @@ import { OutcomeService } from './outcome.service';
 export class AppComponent implements OnInit {
   title = 'cyberoutcomes';
   guidelines;
-  displayedColumns: string[] = ['id', 'name', 'outcome', 'date'];
+  sources: string[];
+  currentSource: string;
+  isLoadingResults = false;
+  displayedColumns: string[] = ['name', 'outcome', 'date'];
+  dataSource: MatTableDataSource<StandardOutcome>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private guidelineGateway: OutcomeService) {}
 
   ngOnInit(): void {
-    this.guidelineGateway.getOutcomes({ author: 'CAE Cyber Defense' })
-      .then(data => {
-        console.log(data);
-        this.guidelines = data.outcomes;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    this.guidelineGateway.getSources()
+      .then(sources => this.sources = sources)
+      .then(() => this.selectSource(this.sources[0]))
+      .catch(error => console.error(error));
+  }
+
+  selectSource(source: string) {
+    this.currentSource = source;
+    this.guidelineGateway.getOutcomes({ author: source })
+    .then(data => {
+      console.log(data);
+      this.dataSource = new MatTableDataSource(data.outcomes);
+      this.paginator.firstPage();
+      this.dataSource.paginator = this.paginator;
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }
 }
