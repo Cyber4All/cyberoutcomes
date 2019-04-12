@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { OutcomeService } from './outcome.service';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { StandardOutcome } from '@cyber4all/clark-entity';
+import { Subject } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +18,20 @@ export class AppComponent implements OnInit {
   isLoadingResults = false;
   displayedColumns: string[] = ['name', 'outcome', 'date'];
   dataSource: MatTableDataSource<StandardOutcome>;
+  search$ = new Subject<string>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private guidelineGateway: OutcomeService) {}
+  constructor(private guidelineGateway: OutcomeService) { }
 
   ngOnInit(): void {
+    this.search$
+      .pipe(
+        debounceTime(650),
+      )
+      .subscribe(searchQuery => {
+        this.applyFilter(searchQuery);
+      });
     this.guidelineGateway.getSources()
       .then(sources => this.sources = sources)
       .then(() => this.selectSource(this.sources[0]))
@@ -31,14 +41,21 @@ export class AppComponent implements OnInit {
   selectSource(source: string) {
     this.currentSource = source;
     this.guidelineGateway.getOutcomes({ author: source })
-    .then(data => {
-      console.log(data);
-      this.dataSource = new MatTableDataSource(data.outcomes);
-      this.paginator.firstPage();
-      this.dataSource.paginator = this.paginator;
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(data => {
+        this.buildDataSource(data.outcomes);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  private buildDataSource(outcomes: StandardOutcome[], filter?: string) {
+    this.dataSource = new MatTableDataSource(outcomes);
+    this.paginator.firstPage();
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

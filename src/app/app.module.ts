@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { OutcomeService } from './outcome.service';
 import { SuggestionFilterComponent } from './standard-outcomes/suggestion-filter.component';
@@ -34,6 +36,8 @@ import { SuggestionFilterComponent } from './standard-outcomes/suggestion-filter
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatButtonToggleModule,
+    MatInputModule,
+    MatDividerModule,
   ],
   providers: [OutcomeService],
   bootstrap: [AppComponent]

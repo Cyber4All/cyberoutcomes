@@ -26,10 +26,6 @@ nav {
     width: 600px;
   }
 }
-.table-wrapper {
-  max-width: 80vw;
-  margin-left: 10vw;
-}
 .activeSource {
   color: white;
   background-color: #673ab7;
@@ -40,4 +36,20 @@ nav {
 }
 .dateColumn {
   flex-shrink: 3;
+}
+.search-wrapper {
+  width: 100%;
+  background-color: white;
+  mat-form-field {
+    margin-top: 5px;
+    margin-left: 20px;
+    width: 50%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .table-wrapper {
+    max-width: 80vw;
+    margin-left: 10vw;
+  }
 }

@@ -14,8 +14,11 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
 
-  <div class="example-loading-shade" *ngIf="isLoadingResults">
-    <mat-spinner></mat-spinner>
+  <div class="search-wrapper">
+    <mat-form-field>
+      <input matInput (keyup)="search$.next($event.target.value)" placeholder="Search across {{ currentSource }}">
+    </mat-form-field>
+    <mat-divider></mat-divider>
   </div>
   <mat-table *ngIf="dataSource" [dataSource]="dataSource">
 
