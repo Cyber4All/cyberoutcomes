@@ -10,3 +10,15 @@ body {
   height: 100vh;
   margin: 0;
 }
+
+
+.page-wrapper {
+  padding-top: 25px;
+  margin-bottom: 50px;
+}
+@media (min-width: 1025px) {
+  .page-wrapper {
+    max-width: 80vw;
+    margin-left: 10vw;
+  }
+}

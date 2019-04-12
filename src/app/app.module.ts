@@ -15,9 +15,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 
 import { OutcomeService } from './outcome.service';
 import { SuggestionFilterComponent } from './standard-outcomes/suggestion-filter.component';
+import { BrowseComponent } from './browse/browse.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,8 @@ import { SuggestionFilterComponent } from './standard-outcomes/suggestion-filter
     StandardOutcomesComponent,
     OutcomesListItemComponent,
     SuggestionFilterComponent,
+    BrowseComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +45,9 @@ import { SuggestionFilterComponent } from './standard-outcomes/suggestion-filter
     MatButtonToggleModule,
     MatInputModule,
     MatDividerModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatSelectModule,
   ],
   providers: [OutcomeService],
   bootstrap: [AppComponent]

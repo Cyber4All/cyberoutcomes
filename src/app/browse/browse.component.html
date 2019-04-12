@@ -1,0 +1,41 @@
+<section class="table-wrapper page-wrapper">
+
+  <div class="search-wrapper">
+    <mat-form-field class="source-select">
+      <mat-label>Source</mat-label>
+      <mat-select [(ngModel)]="currentSource">
+        <mat-option *ngFor="let source of sources" (click)="selectSource(source)" [value]="source">
+          {{ source }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="search-input">
+      <input matInput (keyup)="search$.next($event.target.value)" placeholder="Search across {{ currentSource }}">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+  </div>
+  <mat-table *ngIf="dataSource" [dataSource]="dataSource">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let guideline"> {{guideline.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="outcome">
+      <mat-header-cell *matHeaderCellDef class="outcomeColumn"> Outcome </mat-header-cell>
+      <mat-cell *matCellDef="let guideline" class="outcomeColumn"> {{guideline.outcome}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef class="dateColumn"> Date </mat-header-cell>
+      <mat-cell *matCellDef="let guideline" class="dateColumn"> {{guideline.date}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
+</section>

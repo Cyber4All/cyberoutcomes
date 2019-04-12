@@ -1,52 +1,19 @@
-<nav>
-  <div class="content-wrapper">
-    <img class="cyberoutcomes-logo" src="/assets/logo2.png" alt="Cyber Outcomes Logo" />
-    <img class="tu-logo" src="/assets/tu_logo.png" alt="Towson University Logo" />
+<div class="outcomes-wrapper">
+  <div class="table-wrapper">
+    <mat-toolbar color="primary">
+      <span>Cyber Outcomes</span>
+    </mat-toolbar>
+    <mat-tab-group>
+      <mat-tab label="Browse">
+        <app-browse></app-browse>
+      </mat-tab>
+      <mat-tab label="Search">
+        <div class="page-wrapper">
+            <app-standard-outcomes></app-standard-outcomes>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
-</nav>
-
-
-<section class="table-wrapper">
-  <mat-button-toggle-group #group="matButtonToggleGroup">
-    <mat-button-toggle *ngFor="let source of sources" (click)="selectSource(source)"
-      [ngClass]="{ 'activeSource': source == currentSource }">
-      {{ source }}
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-
-  <div class="search-wrapper">
-    <mat-form-field>
-      <input matInput (keyup)="search$.next($event.target.value)" placeholder="Search across {{ currentSource }}">
-    </mat-form-field>
-    <mat-divider></mat-divider>
-  </div>
-  <mat-table *ngIf="dataSource" [dataSource]="dataSource">
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let guideline"> {{guideline.name}} </mat-cell>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="outcome">
-      <mat-header-cell *matHeaderCellDef class="outcomeColumn"> Outcome </mat-header-cell>
-      <mat-cell *matCellDef="let guideline" class="outcomeColumn"> {{guideline.outcome}} </mat-cell>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef class="dateColumn"> Date </mat-header-cell>
-      <mat-cell *matCellDef="let guideline" class="dateColumn"> {{guideline.date}} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-  <mat-paginator [pageSizeOptions]="[10, 15, 20, 50]"></mat-paginator>
-</section>
-<section class="outcome-search">
-  <div class="wrapper">
-
-  </div>
-</section>
+  
+  <app-footer></app-footer>
+</div>

@@ -42,7 +42,6 @@ import { OutcomeService } from '../outcome.service';
         }`,
         `
       .suggestion-filter-wrapper {
-        padding: 25px;
         display: flex;
         flex-direction: column;
       }

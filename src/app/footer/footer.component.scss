@@ -1,0 +1,16 @@
+footer {
+  width: 100%;
+  color: whitesmoke;
+  background: linear-gradient(45deg, #393f4d, lighten(#1d1e22, 10));
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 20px 0;
+  text-align: center;
+  .logo-wrapper {
+    margin-bottom: 10px;
+    img {
+      height: 100px;
+    }
+  }
+}

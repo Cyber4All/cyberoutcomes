@@ -3,6 +3,7 @@ import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import * as querystring from 'querystring';
 import { LearningObject, StandardOutcome } from '@cyber4all/clark-entity';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class OutcomeService {
@@ -24,6 +25,10 @@ export class OutcomeService {
   getSources(): Promise<string[]> {
     return this.http
       .get(environment.suggestionUrl + '/outcomes/sources')
+      .pipe(
+        // FIXME: Remove manual mapping here when the source is removed from the server
+        map((response: string[]) => response.filter((value) => value !== 'CAE CDE 2019'))
+      )
       .toPromise()
       .then((res: any) => res);
   }
