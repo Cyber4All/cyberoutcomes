@@ -10,7 +10,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="search-input">
-      <input matInput (keyup)="search$.next($event.target.value)" placeholder="Search across {{ currentSource }}">
+      <input matInput (keyup)="search$.next($event.target.value)" placeholder="Filter {{ currentSource }} by keyword">
     </mat-form-field>
     <mat-divider></mat-divider>
   </div>
