@@ -22,3 +22,8 @@ body {
     margin-left: 10vw;
   }
 }
+
+.mat-select-panel {
+  // override the max-height property on the material select boxes so that all outcome sources are displayed
+  max-height: none !important;
+}
